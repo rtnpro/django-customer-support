@@ -1,0 +1,15 @@
+<li id="{{ issue.id }}" class="issue">
+  <a class="issue-text" href="#"
+      {% if issue.selection_handler %}
+        data-selection-handler="{{ issue.selection_handler }}"
+      {% endif %}>
+      {{ issue.label }}
+  </a>
+  {% if issue.sub_issues %}
+    <ul class="sub-issues nav nav-pills nav-stacked">
+      {% for sub_issue in issue.sub_issues %}
+        {% include "customer_support/sub_issue.html" %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+</li>

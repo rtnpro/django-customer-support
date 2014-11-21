@@ -1,0 +1,21 @@
+<div class="step-head">
+  <p class="main">
+    <span class="step-count">{{ step_count }}</span>
+    <span class="step-done"><icon class="fa fa-check"></icon></span>
+    <span class="step-pre-selection-text">{{ step.pre_selection_text }}</span>
+    <span class="step-post-selection-text">{{ step.post_selection_text }}</span>
+  </p>
+</div>
+<div class="step-content">
+  {% if step.type == "ISSUES" %}
+    <div class="issues-container">
+      <ul class="issues nav nav-pills nav-stacked" role="menu">
+        {% for issue in step.issues %}
+          {% include "customer_support/issue.html" %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% elif step.type == "ITEM_SELECTION" %}
+  {% elif step.type == "GET_ASSISTANCE" %}
+  {% endif %}
+</div>

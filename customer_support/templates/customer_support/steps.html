@@ -1,0 +1,12 @@
+<div class="steps">
+  {% for step in page.steps %}
+  <div id="step{{ forloop.counter }}" class="step
+      {% if selection.step == forloop.counter %} open
+      {% elif selection.step < forloop.counter %} done
+      {% endif %}">
+    {% with step_count=forloop.counter %}
+      {% include "customer_support/step.html" %}
+    {% endwith %}
+  </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,79 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<style>
+.issues {
+  width: 200px;
+  min-height: 200px;
+}
+.sub-issues {
+  display: none;
+  position: absolute;
+  width: 200px;
+  left: 200px;
+  top: 0px;
+}
+.issue:hover > a {
+  background-color: #eee;
+}
+.issue:hover .sub-issues,
+.issue.active .sub-issues,
+.sub-issues.active {
+  display: block;
+}
+</style>
+
+<script>
+  $(function () {
+    $('.sub-issue').mouseenter(function () {
+      $(this).parents('.issues').find('.issue').removeClass('active')
+        .end().find('.sub-issues').removeClass('active');
+      $(this).parents('.issue').addClass('active');
+      $('.sub-issues').removeClass('active');
+      $(this).parents('.sub-issues').addClass('active');
+    });
+    $('.issue').mouseenter(function () {
+      if (!$(this).hasClass('active'))
+        $('.issue').removeClass('active');
+      $('.sub-issues').removeClass('active');
+      $(this).find('.sub-issues').addClass('active');
+    });
+  })();
+</script>
+
+<div role="tabpanel">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    {% for page in pages %}
+    <li role="presentation"
+        {% ifequal selection.page page.id %}
+          class="active"
+        {% endifequal %}>
+      <a href="#{{ page.id }}" aria-controls="{{ page.id }}"
+          role="tab" data-toggle="tab">
+          {{ page.label }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <!-- End nav tabs -->
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    {% for page in pages %}
+    <div id="{{ page.id }}" class="tab-pane
+        {% ifequal selection.page page.id %} active
+        {% endifequal %}">
+      {% include "customer_support/steps.html" %}
+    </div>
+    {% endfor %}
+  </div>
+  <!-- End tab panes -->
+</div>
