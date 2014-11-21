@@ -9,7 +9,7 @@
 <div class="step-content">
   {% if step.type == "ISSUES" %}
     <div class="issues-container">
-      <ul class="issues nav nav-pills nav-stacked" role="menu">
+      <ul class="issues" role="menu">
         {% for issue in step.issues %}
           {% include "customer_support/issue.html" %}
         {% endfor %}
