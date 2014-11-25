@@ -92,3 +92,22 @@ class GenericItems(GenericItemBase):
 
     def render_html(self):
         return render(self.TEMPLATE, {'items': self._items})
+
+
+class GenericActions(object):
+
+    def __init__(self, item_id):
+        self.item_id = item_id
+        self.actions = []
+
+    def get_actions_for_item(self):
+        raise NotImplementedError
+
+    def json(self):
+        return simplejson.dumps(self.actions)
+
+    def render_json(self):
+        return HttpResponse(self.json(), mimetype='application/json')
+
+    def render_html(self):
+        pass
